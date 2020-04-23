@@ -50,7 +50,9 @@ namespace libcloudphxx
 
     // final inits common for tail/sd_conc/const_multi
     template <typename real_t, backend_t device>
-    void particles_t<real_t, device>::impl::init_SD_with_distros_finalize(const real_t &kappa)
+    void particles_t<real_t, device>::impl::init_SD_with_distros_finalize(
+    const real_t &kappa
+    )
     {
       // init kappa
       init_kappa(kappa);

@@ -24,12 +24,13 @@ namespace libcloudphxx
       std::map<enum chem_species_t, arrinfo_t<real_t> > ambient_chem
     )
     {
-      sync_in(th, rv, rhod, courant_x, courant_y, courant_z, diss_rate, ambient_chem);
+      sync_in(opts, th, rv, rhod, courant_x, courant_y, courant_z, diss_rate, ambient_chem);
       step_cond(opts, th, rv, ambient_chem);
     }
 
     template <typename real_t, backend_t device>
     void particles_t<real_t, device>::sync_in(
+      const opts_t<real_t> &opts,
       arrinfo_t<real_t> th,
       arrinfo_t<real_t> rv,
       const arrinfo_t<real_t> rhod,      // defaults to NULL-NULL pair (e.g. kinematic or boussinesq model)
@@ -174,15 +175,15 @@ namespace libcloudphxx
         //       that would make it easy to do in exact (per-cell) substepping
         pimpl->hskpng_mfp(); 
 
-        if(pimpl->opts_init.exact_sstp_cond && pimpl->opts_init.sstp_cond > 1)
-        // apply substeps per-particle logic
+        if(pimpl->opts_init.exact_sstp_cond && opts.sstp_cond > 1)
+	// apply substeps per-particle logic
         {
-          for (int step = 0; step < pimpl->opts_init.sstp_cond; ++step) 
+          for (int step = 0; step < opts.sstp_cond; ++step) 
           {   
-            pimpl->sstp_step_exact(step);
+            pimpl->sstp_step_exact(step, opts);
             if(opts.turb_cond)
-              pimpl->sstp_step_ssp(pimpl->opts_init.dt / pimpl->opts_init.sstp_cond);
-            pimpl->cond_sstp(pimpl->opts_init.dt / pimpl->opts_init.sstp_cond, opts.RH_max, opts.turb_cond); 
+              pimpl->sstp_step_ssp(pimpl->opts_init.dt / opts.sstp_cond);
+            pimpl->cond_sstp(pimpl->opts_init.dt / opts.sstp_cond, opts.RH_max, opts.turb_cond); 
           } 
           // copy sstp_tmp_rv and th to rv and th
           pimpl->update_state(pimpl->rv, pimpl->sstp_tmp_rv);
@@ -191,13 +192,13 @@ namespace libcloudphxx
         else
         // apply per-cell sstp logic
         {
-          for (int step = 0; step < pimpl->opts_init.sstp_cond; ++step) 
+          for (int step = 0; step < opts.sstp_cond; ++step) 
           {   
-            pimpl->sstp_step(step);
+            pimpl->sstp_step(step, opts);
             if(opts.turb_cond)
-              pimpl->sstp_step_ssp(pimpl->opts_init.dt / pimpl->opts_init.sstp_cond);
+              pimpl->sstp_step_ssp(pimpl->opts_init.dt / opts.sstp_cond);
             pimpl->hskpng_Tpr(); 
-            pimpl->cond(pimpl->opts_init.dt / pimpl->opts_init.sstp_cond, opts.RH_max, opts.turb_cond);
+            pimpl->cond(pimpl->opts_init.dt / opts.sstp_cond, opts.RH_max, opts.turb_cond);
           }
         }
 

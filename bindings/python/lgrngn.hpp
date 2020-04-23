@@ -152,7 +152,8 @@ namespace libcloudphxx
         const bp_array &Cy,
         const bp_array &Cz,
         const bp_array &diss_rate,
-        bp::dict &ambient_chem
+	const lgr::opts_t<real_t> &opts,
+	bp::dict &ambient_chem
       )
       {
         typedef std::map<enum cmn::chem::chem_species_t, lgr::arrinfo_t<real_t> > map_t;
@@ -174,7 +175,7 @@ namespace libcloudphxx
           np2ai<real_t>(Cy, sz(*arg)),
           np2ai<real_t>(Cz, sz(*arg)),
           np2ai<real_t>(diss_rate, sz(*arg)),
-          map
+	  map
         );
       }
 

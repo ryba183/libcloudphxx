@@ -22,7 +22,7 @@ namespace libcloudphxx
       count_mom.resize(n_cell);
       count_n = 0;
 
-      if(opts_init.sstp_cond > 1 && !opts_init.exact_sstp_cond)
+      if(!opts_init.exact_sstp_cond)
       {
         sstp_tmp_rv.resize(n_cell);
         sstp_tmp_th.resize(n_cell);

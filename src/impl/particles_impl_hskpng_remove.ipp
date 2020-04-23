@@ -47,7 +47,7 @@ namespace libcloudphxx
         real_t_vctrs.insert(&dot_ssp);
       }
 
-      if(opts_init.sstp_cond>1 && opts_init.exact_sstp_cond)
+      if(opts_init.exact_sstp_cond)
       {
         real_t_vctrs.insert(&sstp_tmp_th);
         real_t_vctrs.insert(&sstp_tmp_rv);

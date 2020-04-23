@@ -22,9 +22,12 @@ namespace libcloudphxx
   {
     using namespace common::chem;
 
-    // ctor
     template <typename real_t, backend_t device>
-    particles_t<real_t, device>::particles_t(const opts_init_t<real_t> &opts_init, const int &n_x_bfr, int n_x_tot) 
+    particles_t<real_t, device>::particles_t(
+    const opts_init_t<real_t> &opts_init,
+    const int &n_x_bfr,
+    int n_x_tot
+    ) 
     {
 #if defined(__NVCC__)
       if(opts_init.dev_id >= 0)

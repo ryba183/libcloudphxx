@@ -56,7 +56,7 @@ def test(turb_cond):
   for sstp_cond in [1,2,5]:
     print 'sstp_cond = ' + str(sstp_cond)
     opts.adve=0
-    opts_init.sstp_cond = sstp_cond
+    opts.sstp_cond = sstp_cond
     prtcls = lgrngn.factory(backend, opts_init)
     th =   300 * ones((opts_init.nx, opts_init.nz))
     rv =   .0025 * ones((opts_init.nx, opts_init.nz))

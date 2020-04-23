@@ -14,7 +14,7 @@ namespace libcloudphxx
     template <typename real_t, backend_t device>
     void particles_t<real_t, device>::impl::sstp_save()
     {
-      if (opts_init.sstp_cond == 1) return;
+      if (opts.sstp_cond == 1) return;
 
       const int n = 4;
       thrust_device::vector<real_t>
@@ -46,10 +46,11 @@ namespace libcloudphxx
 
     template <typename real_t, backend_t device>
     void particles_t<real_t, device>::impl::sstp_step(
-      const int &step
+      const int &step,
+      const opts_t<real_t> &opts
     )
     {   
-      if (opts_init.sstp_cond == 1) return;
+      if (opts.sstp_cond == 1) return;
 
       namespace arg = thrust::placeholders;
 
@@ -60,7 +61,7 @@ namespace libcloudphxx
 
       for (int ix = 0; ix < (var_rho ? n : n-1); ++ix)
       {
-        const real_t sstp = opts_init.sstp_cond;
+        const real_t sstp = opts.sstp_cond;
         if (step == 0)
         {
           // sstp_tmp_scl = dscl_adv (i.e. delta, i.e. new - old)
@@ -93,10 +94,12 @@ namespace libcloudphxx
 
     template <typename real_t, backend_t device>
     void particles_t<real_t, device>::impl::sstp_step_exact(
-      const int &step
+      const int &step,
+      const opts_t<real_t> &opts
+      
     )
     {   
-      if (opts_init.sstp_cond == 1) return;
+      if (opts.sstp_cond == 1) return;
 
       namespace arg = thrust::placeholders;
 
@@ -104,11 +107,11 @@ namespace libcloudphxx
       thrust_device::vector<real_t>
         *scl[n] = { &rv,          &th,          &rhod,        &p          },
         *tmp[n] = { &sstp_tmp_rv, &sstp_tmp_th, &sstp_tmp_rh, &sstp_tmp_p },
-        *dlt[n] = { &tmp_device_real_part, &tmp_device_real_part1, &tmp_device_real_part2, &tmp_device_real_part5 };
+        *dlt[n] = { &tmp_device_real_part, &tmp_device_real_part1, &tmp_device_real_part2, &tmp_device_real_part5};
 
-      for (int ix = 0; ix < (const_p ? n : n-1); ++ix)
+       	for (int ix = 0; ix < (const_p ? n : n-1); ++ix)
       {
-        const real_t sstp = opts_init.sstp_cond;
+        const real_t sstp = opts.sstp_cond;
       	if (step == 0)
       	{
       	  // sstp_tmp_scl = dscl_adv (i.e. delta, i.e. new - old)

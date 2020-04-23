@@ -41,6 +41,7 @@ namespace libcloudphxx
 
       // member fields
       opts_init_t<real_t> opts_init; // a copy
+      opts_t<real_t> opts;
       const int n_dims;
       const thrust_size_t n_cell; 
       thrust_size_t n_part,            // total number of SDs
@@ -252,7 +253,7 @@ namespace libcloudphxx
       int m1(int n) { return n == 0 ? 1 : n; }
 
       // ctor 
-      impl(const opts_init_t<real_t> &_opts_init, const int &n_x_bfr, const int &n_x_tot) : 
+      impl(const opts_init_t<real_t> &_opts_init,const int &n_x_bfr, const int &n_x_tot) : 
         init_called(false),
         should_now_run_async(false),
         selected_before_counting(false),
@@ -484,8 +485,8 @@ namespace libcloudphxx
 
       void src(const real_t &dt);
 
-      void sstp_step(const int &step);
-      void sstp_step_exact(const int &step);
+      void sstp_step(const int &step, const opts_t<real_t> &opts);
+      void sstp_step_exact(const int &ste, const opts_t<real_t> &opts);
       void sstp_step_ssp(const real_t &dt);
       void sstp_save();
       void sstp_step_chem(const int &step);

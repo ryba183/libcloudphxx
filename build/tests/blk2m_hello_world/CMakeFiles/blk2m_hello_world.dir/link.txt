@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/blk2m_hello_world.dir/blk2m_hello_world.cpp.o  -o blk2m_hello_world -Wl,-rpath,/home/piotr/Piotr/IGF/libcloudphxx/build -lblitz ../../libcloudphxx_lgrngn.so /usr/lib/gcc/x86_64-linux-gnu/7/libgomp.so -lpthread 

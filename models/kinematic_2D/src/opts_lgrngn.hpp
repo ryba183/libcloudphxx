@@ -247,7 +247,7 @@ void setopts_micro(
     ("chem_rct", po::value<bool>()->default_value(rt_params.cloudph_opts.chem_rct) , "aqueous chemistry      (1=on, 0=off)")
     ("chem_switch", po::value<bool>()->default_value(rt_params.cloudph_opts_init.chem_switch) , "aqueous chemistry (1=on, 0=off)")
     // free parameters
-    ("sstp_cond", po::value<int>()->default_value(rt_params.cloudph_opts_init.sstp_cond), "no. of substeps for condensation")
+    ("sstp_cond", po::value<int>()->default_value(rt_params.cloudph_opts.sstp_cond), "no. of substeps for condensation")
     ("sstp_coal", po::value<int>()->default_value(rt_params.cloudph_opts_init.sstp_coal), "no. of substeps for coalescence")
     ("sstp_chem", po::value<int>()->default_value(rt_params.cloudph_opts_init.sstp_chem), "no. of substeps for chemistry")
     ("dev_count", po::value<int>()->default_value(rt_params.cloudph_opts_init.dev_count), "no of GPUs to use")
@@ -312,7 +312,7 @@ void setopts_micro(
   rt_params.cloudph_opts_init.chem_rho    = setup.chem_rho * si::cubic_metres / si::kilograms;
 
   // free parameters
-  rt_params.cloudph_opts_init.sstp_cond = vm["sstp_cond"].as<int>();
+  rt_params.cloudph_opts.sstp_cond = vm["sstp_cond"].as<int>();
   rt_params.cloudph_opts_init.sstp_coal = vm["sstp_coal"].as<int>();
   rt_params.cloudph_opts_init.sstp_chem = vm["sstp_chem"].as<int>();
   rt_params.cloudph_opts_init.dev_count = vm["dev_count"].as<int>();

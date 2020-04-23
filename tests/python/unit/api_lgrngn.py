@@ -62,7 +62,7 @@ print "subs_switch = ", opts_init.subs_switch
 print "src_switch = ", opts_init.src_switch
 
 print "exact_sstp_cond = ", opts_init.exact_sstp_cond
-print "sstp_cond =", opts_init.sstp_cond
+print "sstp_cond =", opts.sstp_cond
 print "sstp_coal =", opts_init.sstp_coal
 print "sstp_chem =", opts_init.sstp_chem 
 

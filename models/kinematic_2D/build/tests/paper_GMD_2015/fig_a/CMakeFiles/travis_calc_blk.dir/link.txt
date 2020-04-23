@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++14 -DNDEBUG -Ofast -march=native -fopenmp -pthread  -rdynamic CMakeFiles/travis_calc_blk.dir/travis_calc_blk.cpp.o  -o travis_calc_blk 
