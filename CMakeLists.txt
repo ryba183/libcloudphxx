@@ -107,7 +107,7 @@ target_compile_options(cloudphxx_lgrngn PRIVATE $<$<COMPILE_LANGUAGE:CXX>: -Wext
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
 
 # enabling c++11
-target_compile_features(cloudphxx_lgrngn PUBLIC cxx_std_11)
+target_compile_features(cloudphxx_lgrngn PUBLIC cxx_std_14)
 # config-specific flags
 target_compile_options(cloudphxx_lgrngn PRIVATE $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CONFIG:DEBUG>>:         -g -Og -DTHRUST_DEBUG>)
 target_compile_options(cloudphxx_lgrngn PRIVATE $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CONFIG:RELWITHDEBINFO>>: -Ofast -march=native>)
